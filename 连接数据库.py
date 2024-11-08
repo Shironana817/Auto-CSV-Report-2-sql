@@ -62,7 +62,7 @@ def upload_csv(file_path):
 
     try:
         # 读取CSV文件，跳过第一行
-        df = pd.read_csv(file_path, encoding='gb2312', skiprows=1)
+        df = pd.read_csv(file_path, encoding='gb2312', skiprows=1)  #跳过前几行请根据实际需要调整
 
         # 填充第一列的前4行为 'time'
         df.iloc[:3, 0] = 'time'
@@ -79,11 +79,8 @@ def upload_csv(file_path):
         
 
         
-           # 使用 DataFrame 的第一行作为列名
-        #print(df)
-        #df.columns = df.iloc[0]
-        #df = df.drop(0)  # 删除第一行，已作为列名
-
+        # 使用 DataFrame 的第一行作为列名
+       
         # 根据处理后的 DataFrame 创建表
         create_table_from_filename(file_path, df)
 
@@ -118,7 +115,7 @@ def start_upload(directory):
         if filename.endswith(".csv"):
             file_path = os.path.join(directory, filename)
             upload_csv(file_path)
-    Timer(300, start_upload, [directory]).start()  # 每300秒执行一次
+    Timer(300, start_upload, [directory]).start()  # 每300秒执行一次，可更具实际需要调整
 
 # GUI界面
 def browse_folder():
@@ -147,7 +144,7 @@ root.title("CSV上传到MySQL")
 # 数据库连接
 Label(root, text="数据库IP地址").grid(row=0, column=0)
 ip_entry = Entry(root)
-ip_entry.insert(0, "172.16.150.100")
+ip_entry.insert(0, "0.0.0.0")
 ip_entry.grid(row=0, column=1)
 
 Label(root, text="数据库用户名").grid(row=1, column=0)
@@ -157,7 +154,7 @@ user_entry.grid(row=1, column=1)
 
 Label(root, text="数据库密码").grid(row=2, column=0)
 password_entry = Entry(root, show="*")
-password_entry.insert(0, "#321azbilG5")
+
 password_entry.grid(row=2, column=1)
 
 # 文件夹选择
