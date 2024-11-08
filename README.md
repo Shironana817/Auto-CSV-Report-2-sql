@@ -1,1 +1,1 @@
-# Auto-CSV-Report-2-sql
+# 这份脚本可以把SCADA系统输出的CSV格式的标准报表读取并作为数据表插入mysql数据库中
